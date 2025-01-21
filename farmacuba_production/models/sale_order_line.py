@@ -12,7 +12,7 @@ class SaleOrderLine(models.Model):
             if product.type == 'product':  # Aplica solo a productos almacenables
                 if line.product_uom_qty > line.free_qty_today:
                     raise exceptions.ValidationError(_(
-                        "La cantidad solicitada para el producto '%s' excede el stock disponible considerando reservas en fabricación (%s unidades disponibles). "
-                        "Por favor, ajuste la cantidad o verifique las reservas."
+                        "The quantity requested for product '%s' exceeds the available stock considering reservations in manufacturing (%s units available). "
+                        "Please adjust the quantity or check reservations."
                         % (product.name, line.free_qty_today)
                     ))

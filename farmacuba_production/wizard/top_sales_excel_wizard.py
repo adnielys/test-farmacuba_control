@@ -8,7 +8,7 @@ from datetime import datetime
 
 class TopSalesExcelWizard(models.TransientModel):
     _name = 'top.sales.excel.wizard'
-    _description = 'Wizard para las 5 Mejores Ventas'
+    _description = 'Top 5 Best Sellers Wizard'
 
     year = fields.Selection(
         [(str(y), str(y)) for y in range(2000, 2100)],
@@ -47,26 +47,39 @@ class TopSalesExcelWizard(models.TransientModel):
         worksheet = workbook.add_worksheet("Top 5 Ventas")
 
         # Configurar estilos
-        bold = workbook.add_format({'bold': True})
+        bold = workbook.add_format(
+            {'bold': True, 'align': 'center', 'valign': 'vcenter', 'bg_color': '#F2F2F2', 'border': 1})
+        header_format = workbook.add_format({'bold': True, 'font_size': 14, 'align': 'center', 'valign': 'vcenter'})
         currency = workbook.add_format({'num_format': '$#,##0.00'})
 
-        # Escribir encabezados
-        headers = ["Orden", "Cliente", "Fecha", "Total de Venta"]
+        # Agregar el encabezado del reporte
+        report_title = f"Top 5 Sales Report - {self.year}"
+        worksheet.merge_range('A1:D1', report_title, header_format)
+
+        # Ajustar ancho de columnas
+        worksheet.set_column('A:A', 15)  # Orden
+        worksheet.set_column('B:B', 30)  # Cliente
+        worksheet.set_column('C:C', 15)  # Fecha
+        worksheet.set_column('D:D', 20)  # Total de Venta
+
+        # Escribir encabezados de columnas
+        headers = ["Order", "Customer", "Date", "Total Sales"]
         for col, header in enumerate(headers):
-            worksheet.write(0, col, header, bold)
+            worksheet.write(2, col, header, bold)  # Escribir en la fila 3 (índice 2)
 
         # Escribir datos
-        for row, sale in enumerate(sales_data, start=1):
+        for row, sale in enumerate(sales_data, start=3):  # Comenzar en la fila 4
             worksheet.write(row, 0, sale['order_name'])
             worksheet.write(row, 1, sale['customer_name'])
             worksheet.write(row, 2, sale['date_order'].strftime('%Y-%m-%d'))
             worksheet.write(row, 3, sale['total_sales'], currency)
 
+        # Cerrar el workbook
         workbook.close()
         output.seek(0)
 
         # Devolver el archivo como attachment
-        file_name = f"Top_5_Ventas_{self.year}.xlsx"
+        file_name = f"Top_5_Sales_{self.year}.xlsx"
         attachment = self.env['ir.attachment'].create({
             'name': file_name,
             'type': 'binary',

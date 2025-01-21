@@ -16,8 +16,8 @@ class SaleOrder(models.Model):
                     available_qty = line.product_id.qty_available
                     if line.product_uom_qty > available_qty:
                         raise ValidationError(
-                            f"No se puede confirmar el pedido porque el producto {line.product_id.name} "
-                            f"no tiene suficiente stock. Disponible: {available_qty}, Solicitado: {line.product_uom_qty}."
+                            f"The order cannot be confirmed because the product {line.product_id.name} "
+                            f"out of stock. Available: {available_qty}, Required: {line.product_uom_qty}."
                         )
 
     def export_top_sales_to_excel(self):
@@ -38,7 +38,7 @@ class SaleOrder(models.Model):
         sheet = workbook.add_worksheet('Top Sales')
 
         # Encabezados
-        headers = ['Producto', 'Cantidad Vendida', 'Total Venta']
+        headers = ['Product', 'Quantity Sold', 'Total Sale']
         for col, header in enumerate(headers):
             sheet.write(0, col, header)
 

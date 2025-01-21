@@ -11,7 +11,7 @@ class MrpBom(models.Model):
         for line in bom.bom_line_ids:
             if not line.supplier_id:
                 raise exceptions.ValidationError(
-                    f"La línea del producto {line.product_id.display_name} no tiene un proveedor asignado."
+                    f"Product line {line.product_id.display_name} does not have a supplier assigned."
                 )
         return bom
 
@@ -21,7 +21,7 @@ class MrpBom(models.Model):
             for line in bom.bom_line_ids:
                 if not line.supplier_id:
                     raise exceptions.ValidationError(
-                        f"La línea del producto {line.product_id.display_name} no tiene un proveedor asignado."
+                        f"The product line {line.product_id.display_name} does not have a supplier assigned."
                     )
         return res
 
@@ -31,17 +31,17 @@ class MrpBomLine(models.Model):
 
     supplier_id = fields.Many2one(
         'res.partner',
-        string="Proveedor",
+        string="Supplier",
         default=lambda self: self._default_supplier_id(),
         domain="[('id', 'in', product_supplier_ids)]",
-        help="Proveedor predeterminado asociado al producto de esta línea de materiales.",
+        help="Default supplier associated with the product of this material line.",
     )
 
     product_supplier_ids = fields.Many2many(
         'res.partner',
         compute="_compute_product_supplier_ids",
-        string="Proveedores del Producto",
-        help="Lista de proveedores asociados al producto.",
+        string="Product Suppliers",
+        help="List of suppliers associated with the product.",
     )
 
     @api.constrains('product_id')

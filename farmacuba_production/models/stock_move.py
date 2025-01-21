@@ -5,10 +5,10 @@ class StockMove(models.Model):
 
     supplier_id = fields.Many2one(
         'res.partner',
-        string="Proveedor",
+        string="Supplier",
         compute='_compute_supplier_id',
         store=True,
-        help="Proveedor asociado al material en la lista de materiales.",
+        help="Supplier associated with the material in the bill of materials.",
     )
 
     @api.depends('product_id', 'raw_material_production_id.bom_id')

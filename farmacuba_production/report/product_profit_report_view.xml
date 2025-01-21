@@ -4,12 +4,11 @@
         <field name="name">product.profit.report.tree</field>
         <field name="model">product.profit.report</field>
         <field name="arch" type="xml">
-            <tree string="Reporte de Utilidades por Producto">
+            <tree string="Earnings Report by Product">
                 <field name="product_id"/>
                 <field name="year"/>
                 <field name="total_sales"/>
                 <field name="total_revenue"/>
-                <field name="standard_price"/>
                 <field name="total_cost"/>
                 <field name="profit_margin"/>
             </tree>
@@ -17,7 +16,7 @@
     </record>
 
     <record id="action_product_profit_report" model="ir.actions.act_window">
-        <field name="name">Reporte de Utilidades</field>
+        <field name="name">Earnings Report by Product</field>
         <field name="res_model">product.profit.report</field>
         <field name="view_mode">tree</field>
         <field name="context">{}</field>

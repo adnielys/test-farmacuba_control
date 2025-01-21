@@ -25,7 +25,7 @@
 
 <!--Definir el menu-->
    <menuitem id="menu_product_profit"
-        name="Reporte de utilidad por producto"
+        name="Utility report by product"
         parent="mrp.menu_mrp_reporting"
         action="action_product_profit_report_wizard"
         sequence="100" />
