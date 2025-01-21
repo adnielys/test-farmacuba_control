@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_top_sales_excel_wizard_form" model="ir.ui.view">
+        <field name="name">top.sales.excel.wizard.form</field>
+        <field name="model">top.sales.excel.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Exportar Top 5 Ventas">
+                <group>
+                    <field name="year"/>
+                </group>
+                <footer>
+                    <button string="Exportar" type="object" name="export_top_sales" class="btn-primary"/>
+                    <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_top_sales_excel_wizard" model="ir.actions.act_window">
+        <field name="name">Top 5 Ventas</field>
+        <field name="res_model">top.sales.excel.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+     <menuitem id="menu_top_sales_excel" name="Top 5 Ventas"
+        parent="sale.menu_sale_report"
+        action="action_top_sales_excel_wizard"
+        sequence="25"/>
+</odoo>

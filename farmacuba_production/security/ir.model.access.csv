@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_profit_report,farmacuba_production_product_profit_report,model_product_profit_report,,1,1,1,1
+access_product_profit_report_wizard,farmacuba_production_product_profit_report_wizard,model_product_profit_report_wizard,,1,1,1,1
+access_top_sales_excel_wizard,farmacuba_production_top_sales_excel_wizard,model_top_sales_excel_wizard,,1,1,1,1
+
+

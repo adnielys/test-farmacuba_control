@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_product_profit_report_tree" model="ir.ui.view">
+        <field name="name">product.profit.report.tree</field>
+        <field name="model">product.profit.report</field>
+        <field name="arch" type="xml">
+            <tree string="Reporte de Utilidades por Producto">
+                <field name="product_id"/>
+                <field name="year"/>
+                <field name="total_sales"/>
+                <field name="total_revenue"/>
+                <field name="standard_price"/>
+                <field name="total_cost"/>
+                <field name="profit_margin"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_product_profit_report" model="ir.actions.act_window">
+        <field name="name">Reporte de Utilidades</field>
+        <field name="res_model">product.profit.report</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+    </record>
+
+<!--    <menuitem id="menu_product_profit_report" name="Reporte de Utilidades"-->
+<!--        parent="menu_production_report" sequence="2"-->
+<!--        action="action_product_profit_report"/>-->
+</odoo>
